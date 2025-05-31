@@ -1,0 +1,2362 @@
+@charset "UTF-8";
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0
+}
+
+:focus {
+    outline: none
+}
+
+html {
+    height: 100%;
+    tab-size: 4;
+    font-size: 14px;
+    line-height: 28px;
+    -webkit-text-size-adjust: none
+}
+
+body {
+    position: relative;
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0)
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+    cursor: pointer
+}
+
+a:hover {
+    text-decoration: underline
+}
+
+ul {
+    list-style-type: none
+}
+
+hr {
+    height: 1px;
+    border: none
+}
+
+img,
+iframe {
+    border: none
+}
+
+input,
+select,
+button,
+textarea,
+table,
+optgroup,
+pre {
+    font-size: inherit;
+    font-family: inherit;
+    color: inherit
+}
+
+input,
+select,
+button,
+textarea,
+label,
+img,
+svg {
+    vertical-align: top
+}
+
+input,
+select,
+button,
+textarea {
+    border-radius: 0
+}
+
+button {
+    cursor: pointer
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0
+}
+
+[disabled] {
+    opacity: 0.4;
+    cursor: not-allowed !important;
+    pointer-events: none
+}
+
+[disabled] [disabled] {
+    opacity: 1
+}
+
+[hidden] {
+    display: none !important
+}
+
+body {
+    height: 100%;
+    // cursor: url("../img/cursors/point-d48e97b6.png"), pointer;
+    // cursor: pointer;
+    overflow: hidden;
+    background: #000;
+    font-family: Arial
+}
+
+body *,
+body td {
+    cursor: inherit
+}
+
+body:lang(zhcn) {
+    letter-spacing: 0.05em
+}
+
+::-webkit-scrollbar {
+    height: 10px;
+    width: 10px;
+    background: #222
+}
+
+::-webkit-scrollbar-thumb {
+    background: #333
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #444
+}
+
+::-webkit-scrollbar-thumb:active {
+    background: #555
+}
+
+.option__f-list {
+    cursor: inherit
+}
+
+f-switch {
+    width: 36px;
+    height: 24px;
+    border-radius: 12px;
+    background: #050505;
+    border: 1px solid #3c3c3c;
+    margin: 2px 0
+}
+
+f-switch .ball__f-switch {
+    width: 20px;
+    height: 20px;
+    background: #373737
+}
+
+f-switch:hover {
+    background: #050505
+}
+
+f-switch:hover .ball__f-switch {
+    background: #534c99
+}
+
+f-switch.on__f-switch {
+    background: #000;
+    border-color: #7365fe
+}
+
+f-switch.on__f-switch .ball__f-switch {
+    background: #7365fe;
+    margin-left: calc(100% - 20px)
+}
+
+f-switch.on__f-switch:hover {
+    background: #000
+}
+
+button {
+    background: #111;
+    border-color: #222;
+    border-radius: 4px;
+    color: #aeaeae
+}
+
+button:hover,
+button:focus,
+button:active {
+    background: #000;
+    border-color: #333;
+    color: #fff
+}
+
+button[primary] {
+    background: #000;
+    border-color: #333;
+    color: #fff
+}
+
+button[primary]:hover,
+button[primary]:focus,
+button[primary]:active {
+    background: #000;
+    border-color: #444;
+    color: #fff
+}
+
+f-buttongroup {
+    border-radius: 4px
+}
+
+f-menu {
+    border: 2px solid #333;
+    filter: drop-shadow(0 2px 5px #000)
+}
+
+.triangle__f-menu {
+    width: 16px;
+    height: 11px;
+    border: none
+}
+
+.triangle__f-menu::before {
+    content: "";
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 11px solid #333;
+    left: 0;
+    top: 0
+}
+
+.triangle__f-menu::after {
+    content: "";
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 11px solid #1a1a1a;
+    left: 0;
+    top: 4px
+}
+
+.triangle-herizontal__f-menu {
+    width: 11px;
+    height: 16px;
+    border: none
+}
+
+.triangle-herizontal__f-menu::before {
+    content: "";
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 11px solid #333;
+    border-left: none;
+    left: 0;
+    top: 0
+}
+
+.triangle-herizontal__f-menu::after {
+    content: "";
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 11px solid #1a1a1a;
+    border-left: none;
+    left: 4px;
+    top: 0
+}
+
+f-tooltip {
+    border: 2px solid #333;
+    filter: drop-shadow(0 2px 5px #000)
+}
+
+.triangle__f-tooltip {
+    width: 16px;
+    height: 11px;
+    border: none
+}
+
+.triangle__f-tooltip::before {
+    content: "";
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 11px solid #333;
+    left: 0;
+    top: 0
+}
+
+.triangle__f-tooltip::after {
+    content: "";
+    position: absolute;
+    border-left: 8px solid transparent;
+    border-right: 8px solid transparent;
+    border-bottom: 11px solid #1a1a1a;
+    left: 0;
+    top: 4px
+}
+
+.triangle-herizontal__f-tooltip {
+    width: 11px;
+    height: 16px;
+    border: none
+}
+
+.triangle-herizontal__f-tooltip::before {
+    content: "";
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 11px solid #333;
+    border-left: none;
+    left: 0;
+    top: 0
+}
+
+.triangle-herizontal__f-tooltip::after {
+    content: "";
+    position: absolute;
+    border-top: 8px solid transparent;
+    border-bottom: 8px solid transparent;
+    border-right: 11px solid #1a1a1a;
+    border-left: none;
+    left: 4px;
+    top: 0
+}
+
+.main-container {
+    display: flex;
+    flex: 1;
+    min-height: 0
+}
+
+.main-menu {
+    padding: 20px;
+    background: #000;
+    width: 260px;
+    display: flex;
+    flex-direction: column
+}
+
+.main-menu .app-nav button {
+    height: 28px;
+    line-height: 26px
+}
+
+@media (max-width: 768px) {
+    .main-menu {
+        width: 74px;
+        padding: 15px 15px 0
+    }
+
+    .main-menu .app-nav {
+        display: none
+    }
+}
+
+.main-menu-item {
+    display: flex;
+    align-items: center;
+    margin: 10px -20px 10px 10px;
+    flex: 0 1 auto;
+    min-height: 0
+}
+
+@media (max-width: 768px) {
+    .main-menu-item {
+        margin: 0 -15px 15px 0;
+        font-size: 0
+    }
+}
+
+.main-menu-item-name {
+    margin-left: 10px
+}
+
+.main-menu-item:not(.active) {
+    opacity: 0.6;
+    filter: grayscale(0.3)
+}
+
+.main-menu-item.active {
+    border-right: 1px solid #eee
+}
+
+.main-menu-item:hover {
+    opacity: 1
+}
+
+.main-menu-item:not(.active) .main-menu-item-name {
+    color: #fff
+}
+
+.main-content {
+    flex: 1;
+    background: #1a1a1a;
+    display: flex;
+    overflow-y: auto;
+    margin-top: -60px;
+    padding-top: 60px
+}
+
+.main-content-wrapper {
+    width: 1152px;
+    min-width: 60vw;
+    max-width: calc(100vw - 304px);
+    margin: 0 auto;
+    position: relative
+}
+
+@media (max-width: 768px) {
+    .main-content-wrapper {
+        width: 100%;
+        max-width: none;
+        padding: 0 20px
+    }
+}
+
+.sub-menu {
+    display: flex;
+    align-items: center;
+    margin-bottom: 6px
+}
+
+.sub-menu-container {
+    margin-top: 12px;
+    position: relative
+}
+
+.sub-menu-arrow {
+    height: 34px;
+    line-height: 32px;
+    color: #777;
+    border: 1px solid #222;
+    border-radius: 4px;
+    padding: 0 8px 0 14px;
+    margin-right: 20px;
+    background: #111;
+    position: relative;
+    min-width: 85px
+}
+
+.sub-menu-arrow:lang(zhcn) {
+    min-width: 54px
+}
+
+.sub-menu-arrow::before {
+    content: "";
+    position: absolute;
+    right: -14px;
+    top: -1px;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 15px solid #282828
+}
+
+.sub-menu-arrow::after {
+    content: "";
+    position: absolute;
+    right: -13px;
+    top: -1px;
+    border-top: 17px solid transparent;
+    border-bottom: 17px solid transparent;
+    border-left: 15px solid #111
+}
+
+.sub-menu-arrow-tips {
+    margin-left: 4px
+}
+
+.sub-menu-arrow-profession {
+    min-width: 142px
+}
+
+.sub-menu-arrow-profession:lang(zhcn) {
+    min-width: 102px
+}
+
+.sub-menu-toolbar {
+    display: flex;
+    flex: 1;
+    flex-wrap: wrap
+}
+
+@media (max-width: 768px) {
+    .sub-menu-toolbar {
+        flex-wrap: nowrap;
+        overflow-x: auto
+    }
+}
+
+.sub-menu-button:not(:last-child) {
+    margin-right: 5px
+}
+
+.sub-menu-button:not(.active) {
+    opacity: 0.7;
+    filter: grayscale(0.3)
+}
+
+.sub-menu-small-container {
+    border-top: 1px solid #282828;
+    margin-top: 2px;
+    padding-top: 8px;
+    position: relative
+}
+
+.sub-menu-small .sub-menu-arrow {
+    height: 28px;
+    line-height: 26px;
+    min-width: 78px;
+    padding: 0 6px 0 12px
+}
+
+.sub-menu-small .sub-menu-arrow:lang(zhcn) {
+    min-width: 50px
+}
+
+.sub-menu-small .sub-menu-arrow::before {
+    right: -11px;
+    top: -1px;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-left: 12px solid #282828
+}
+
+.sub-menu-small .sub-menu-arrow::after {
+    right: -10px;
+    top: -1px;
+    border-top: 14px solid transparent;
+    border-bottom: 14px solid transparent;
+    border-left: 12px solid #111
+}
+
+.sub-menu-small .wow-icon-medium {
+    width: 34px;
+    height: 34px;
+    padding: 3px
+}
+
+.sub-menu-small .wow-icon-medium img {
+    width: 28px;
+    height: 28px
+}
+
+.sub-menu-small .wow-icon-medium::after {
+    background-size: 100%
+}
+
+.sub-menu-small .sub-menu-button:not(:last-child) {
+    margin-right: 3px
+}
+
+.list-search-head {
+    display: flex;
+    margin-top: 10px;
+    padding-bottom: 6px;
+    border-bottom: 1px solid #282828;
+    position: relative
+}
+
+@media (max-width: 768px) {
+    .list-search-head {
+        margin-top: 6px;
+        padding-bottom: 8px
+    }
+}
+
+.list-search-head-label {
+    color: #777;
+    line-height: 32px;
+    font-size: 0.93rem;
+    white-space: nowrap
+}
+
+@media (max-width: 768px) {
+    .list-search-head .global-search-normal {
+        flex: 1;
+        margin-left: 20px
+    }
+}
+
+.list-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column
+}
+
+@media (max-width: 768px) {
+    .list-container {
+        overflow-x: auto
+    }
+}
+
+.app-header {
+    height: 60px;
+    text-align: center;
+    border-bottom: 1px solid #333;
+    display: flex;
+    padding: 0 24px;
+    position: relative;
+    z-index: 20;
+    background: linear-gradient(to right, black, rgba(26, 26, 26, 0.5))
+}
+
+.app-header-logo {
+    font-size: 18px;
+    font-weight: 100;
+    line-height: 40px;
+    padding: 10px 10px 10px 32px;
+    background: url(../img/header/logo-db8eb613.svg) left center no-repeat
+}
+
+.app-header .global-search {
+    width: 200px;
+    margin-top: 14px;
+    margin-left: auto
+}
+
+@media (max-width: 768px) {
+    .app-header .global-search {
+        margin-top: 9px;
+        width: 160px
+    }
+}
+
+.app-header-buttons {
+    margin-left: 15px;
+    margin-top: 15px;
+    margin-bottom: 15px;
+    display: flex
+}
+
+.app-header-button {
+    line-height: 30px;
+    padding: 0 10px;
+    margin: 0 5px;
+    border-bottom: 1px solid transparent;
+    color: #ccc;
+    display: inline-flex;
+    align-items: center
+}
+
+.app-header-button:hover {
+    border-bottom-color: #555;
+    color: #fff
+}
+
+.app-header-button.active {
+    border-bottom-color: #888;
+    color: #fff
+}
+
+.app-header-button-favourite-icon {
+    margin-right: 4px
+}
+
+.app-header-button-settings {
+    border-bottom: none;
+    padding: 0;
+    padding-left: 25px;
+    margin-left: 15px;
+    background: url(../img/header/setting-6a67032f.svg) left center no-repeat
+}
+
+@media (max-width: 768px) {
+    .app-header {
+        height: 50px;
+        padding: 0 0 0 16px
+    }
+
+    .app-header-logo {
+        font-size: 14px;
+        line-height: 30px;
+        background-size: 16px;
+        padding-left: 24px
+    }
+}
+
+.app-header-mobile-menu {
+    margin-left: 10px;
+    width: 50px;
+    height: 50px;
+    padding: 10px 9px
+}
+
+.app-header-mobile-menu div {
+    margin: 5px;
+    height: 3px;
+    background: #fff
+}
+
+.app-header-mobile-menu.active div {
+    background: #ccc
+}
+
+.mobile-menu {
+    position: fixed;
+    top: 50px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    line-height: 50px;
+    background: rgba(0, 0, 0, 0.95);
+    padding: 0 16px
+}
+
+.mobile-menu div {
+    border-bottom: 1px solid #252525
+}
+
+.mobile-menu div:hover {
+    background: #0c0a19
+}
+
+.app-nav {
+    width: 100%;
+    margin-bottom: 20px
+}
+
+.app-nav button {
+    flex: 1;
+    line-height: 32px;
+    height: 34px;
+    flex: 1 1 auto;
+    font-size: 13px
+}
+
+.app-nav button:lang(enus) {
+    font-size: 11px
+}
+
+.app-entry {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+    padding: 20px;
+    background: #222;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+}
+
+.app-entry-select-line {
+    display: flex;
+    margin-bottom: 20px
+}
+
+.app-entry-select span {
+    display: inline-block;
+    width: 150px;
+    padding-right: 10px;
+    text-align: right
+}
+
+.app-entry-select f-select {
+    width: 150px
+}
+
+.app-entry-go {
+    margin-left: auto
+}
+
+.app-load-progress {
+    margin: auto;
+    width: 200px;
+    font-weight: bold;
+    font-size: 20px;
+    font-family: consolas, Monaco;
+    text-align: center;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5)
+}
+
+.app-main {
+    display: flex;
+    flex-direction: column;
+    height: 100%
+}
+
+.app-main-content {
+    text-align: center
+}
+
+.app-banner {
+    height: 240px;
+    // background: url(../img/banner/banner-bg-76a9c911.jpg) left 10%/cover no-repeat;
+    background-color: #102727;
+    border-bottom: 1px solid #343434;
+    position: relative
+}
+
+.app-banner-logo {
+    height: 100%;
+    // background: rgba(0, 0, 0, 0.75) url(../img/header/logo-db8eb613.svg) center/auto 150px no-repeat
+}
+
+@media (max-width: 768px) {
+    .app-banner {
+        height: 100px
+    }
+
+    .app-banner-logo {
+        background-size: 34px
+    }
+}
+
+.app-title {
+    text-align: center;
+    font-size: 32px;
+    line-height: 48px;
+    font-weight: 100;
+    margin-top: max(30vh - 250px, 45px)
+}
+
+.app-sub-title {
+    text-align: center;
+    font-weight: 100;
+    font-size: 1rem;
+    color: #ccc;
+    margin-top: 6px
+}
+
+.app .global-search-large {
+    margin-top: 35px
+}
+
+.app-links {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+    line-height: 24px
+}
+
+.app-link {
+    color: #eee
+}
+
+.app-link:hover {
+    border-bottom: 1px solid currentColor
+}
+
+.app-link.current {
+    color: #888;
+    border-bottom: none
+}
+
+.app-link-spliter {
+    margin-left: 16px;
+    margin-right: 16px;
+    width: 1px;
+    border-right: 1px solid #444
+}
+
+.app-version-select {
+    display: inline-block;
+    color: #ffd100
+}
+
+.app-language-select f-icon,
+.app-version-select f-icon {
+    margin-left: 3px
+}
+
+.global-search {
+    width: 270px;
+    margin-left: auto;
+    max-width: 100%
+}
+
+.global-search input:focus {
+    border-color: rgba(115, 101, 254, 0.5);
+    box-shadow: none
+}
+
+.global-search-normal {
+    height: 32px
+}
+
+.global-search-normal input {
+    height: 32px;
+    line-height: 32px;
+    border-radius: 16px;
+    border: 1px solid #292929;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0 30px
+}
+
+.global-search-normal .search-icon__global-search {
+    left: 12px
+}
+
+.global-search-normal .clear__global-search {
+    right: 4px
+}
+
+.global-search-large {
+    width: 500px;
+    height: 40px;
+    margin-right: auto
+}
+
+.global-search-large input {
+    height: 40px;
+    line-height: 40px;
+    padding: 0 36px;
+    font-size: 16px;
+    border: 2px solid #353535;
+    background: #0d0d0d
+}
+
+.global-search-large svg {
+    width: 20px;
+    height: 20px
+}
+
+.global-search-large .search-icon__global-search {
+    left: 10px
+}
+
+.global-search-large .clear__global-search {
+    width: 36px
+}
+
+.global-search-menu {
+    width: 320px;
+    line-height: 20px;
+    border: 3px solid #333;
+    background: #1a1a1a;
+    border-radius: 0
+}
+
+@media (max-width: 768px) {
+    .global-search-menu {
+        width: calc(100vw - 40px);
+        max-width: none
+    }
+}
+
+.global-search-menu f-list {
+    padding: 8px 6px
+}
+
+.global-search-menu .triangle__f-menu {
+    border: none;
+    width: 20px;
+    height: 14px;
+    left: 12px
+}
+
+.global-search-menu .triangle__f-menu::before {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 14px solid #333;
+    left: 0;
+    top: 0
+}
+
+.global-search-menu .triangle__f-menu::after {
+    content: "";
+    position: absolute;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-bottom: 14px solid #1a1a1a;
+    left: 0;
+    top: 5px
+}
+
+.global-search-menu .option__f-list {
+    padding: 4px 6px;
+    margin: 0;
+    border-color: #222
+}
+
+.global-search-menu .text__f-list {
+    padding-right: 0
+}
+
+.global-search-menu .wow-item-small,
+.global-search-menu .wow-quest,
+.global-search-menu .wow-npc,
+.global-search-menu .wow-object,
+.global-search-menu .wow {
+    display: flex;
+    flex: 1;
+    min-width: 0;
+    height: 28px;
+    line-height: 28px;
+    padding-right: 24px
+}
+
+.global-search-menu .wow-icon-tiny {
+    width: 24px;
+    height: 24px
+}
+
+.global-search-menu .wow-icon-tiny img {
+    width: 20px;
+    height: 20px
+}
+
+.global-search-menu .wow-item-name {
+    padding-left: 7px;
+    font-size: 1rem
+}
+
+.global-search-menu .wow-item-name,
+.global-search-menu .wow-quest-name,
+.global-search-menu .wow-npc-name {
+    min-width: 0;
+    flex: 0 1 auto;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.global-search-menu .source-marker {
+    height: 28px;
+    margin-right: 7px;
+    flex: none
+}
+
+.global-search-menu-item {
+    display: flex
+}
+
+.global-search-menu-goto-items {
+    padding: 2px;
+    margin-right: -2px;
+    margin-left: -24px
+}
+
+.item-list {
+    display: flex
+}
+
+.item-list-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 15px 0 20px 0
+}
+
+@media (max-width: 768px) {
+    .item-list-wrapper {
+        padding: 15px
+    }
+}
+
+.item-list-table td:first-child {
+    padding-left: 5px
+}
+
+@media (max-width: 768px) {
+    .item-list-table {
+        width: calc(100vw + 290px)
+    }
+
+    .item-list-table td:first-child {
+        padding-left: 0
+    }
+}
+
+.item-list-button-group {
+    font-weight: 100;
+    margin: -1px -6px -6px;
+    padding: 6px;
+    position: relative;
+    overflow-x: auto
+}
+
+.item-list-button-group button {
+    height: 34px;
+    line-height: 32px;
+    padding: 0 40px
+}
+
+.item-list .double-decimal-column {
+    display: block;
+    width: 16px;
+    text-align: right
+}
+
+.item-list .triple-decimal-column {
+    display: block;
+    width: 25px;
+    text-align: right;
+    white-space: nowrap
+}
+
+.item-list .requires-level-column,
+.item-list .item-level-column {
+    font-size: 0.93rem;
+    color: #bbb
+}
+
+.item-list .more {
+    display: inline-block;
+    width: 8px;
+    margin-right: -8px
+}
+
+.item-list .score {
+    display: flex;
+    width: 100%;
+    align-items: center
+}
+
+.item-list .score-percent {
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+    padding: 18px 0 18px 0;
+    background-clip: content-box
+}
+
+.item-list .score-additional {
+    width: 12px;
+    height: 4px;
+    margin-right: -12px;
+    text-align: center;
+    font-size: 0.86rem
+}
+
+.score-number {
+    font-size: 1rem
+}
+
+.talent-background {
+    position: absolute;
+    right: 0;
+    top: -60px;
+    width: 270px;
+    height: 270px;
+    overflow: hidden;
+    pointer-events: none
+}
+
+.talent-background img {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0
+}
+
+.talent-background:after {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    background-image: radial-gradient(closest-side, rgba(26, 26, 26, 0.5) 0%, #1a1a1a 100%)
+}
+
+.weight-editor {
+    display: flex;
+    width: 500px;
+    max-height: 100%
+}
+
+.weight-editor-label {
+    display: inline-block;
+    width: 100px
+}
+
+.weight-editor-name {
+    display: flex;
+    margin: 0 0 10px 0
+}
+
+.weight-editor-name-input {
+    flex: 1
+}
+
+.weight-editor-talents {
+    margin: 5px 0;
+    line-height: 44px
+}
+
+.weight-editor-talents .wow-icon-medium {
+    opacity: 0.7;
+    filter: grayscale(0.3)
+}
+
+.weight-editor-talents .wow-icon-medium.active {
+    opacity: 1;
+    filter: none
+}
+
+.weight-editor-group {
+    margin: 10px 0 0 0
+}
+
+.weight-editor-group-title {
+    border-bottom: 1px solid #333
+}
+
+.weight-editor-group-title:hover {
+    color: #7365fe;
+    border-bottom-color: #7365fe
+}
+
+.weight-editor-fields {
+    margin: 15px 0 0 0
+}
+
+.weight-editor-field {
+    display: flex
+}
+
+.weight-editor-field span {
+    display: inline-block;
+    width: 220px;
+    padding-right: 20px;
+    text-align: right;
+    font-size: 0.86rem;
+    flex: 1
+}
+
+.weight-editor-field f-icon {
+    margin: 4px 0 6px 5px
+}
+
+.weight-editor-field f-slider {
+    flex: 1
+}
+
+.location-editor-nav {
+    display: flex;
+    margin-top: 10px
+}
+
+.location-editor-btn {
+    margin-right: 8px
+}
+
+.location-editor-add {
+    width: 200px;
+    margin-left: auto
+}
+
+.location-editor-delete {
+    margin-left: 10px
+}
+
+.location-editor-map {
+    width: 1002px;
+    height: 668px;
+    margin-top: 10px
+}
+
+.profession-list-wrapper {
+    padding: 15px 0 20px 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column
+}
+
+@media (max-width: 768px) {
+    .profession-list-wrapper {
+        padding: 15px
+    }
+}
+
+.profession-list-enchanting .sub-menu-arrow:lang(enus) {
+    min-width: 150px
+}
+
+.profession-list-enchanting .sub-menu-arrow:lang(zhcn) {
+    min-width: 100px
+}
+
+@media (max-width: 768px) {
+    .profession-skill-table {
+        width: 795px
+    }
+}
+
+.profession-skill-table td:first-child {
+    padding-left: 5px
+}
+
+.profession-skill-table-colors {
+    font-weight: bold;
+    font-size: 0.86rem
+}
+
+.profession-skill-table-colors span {
+    margin-left: 2px;
+    margin-right: 3px
+}
+
+.profession-skill-table-reagents,
+.profession-skill-table-recipes {
+    white-space: normal
+}
+
+.profession-skill-table-reagents .wow-item,
+.profession-skill-table-recipes .wow-item {
+    height: 32px;
+    margin-left: -2px;
+    margin-right: -2px
+}
+
+.profession-skill-table-reagents .wow-icon-medium,
+.profession-skill-table-recipes .wow-icon-medium {
+    width: 32px;
+    height: 32px;
+    padding: 3px
+}
+
+.profession-skill-table-reagents .wow-icon-medium img,
+.profession-skill-table-recipes .wow-icon-medium img {
+    width: 26px;
+    height: 26px
+}
+
+.profession-skill-table-reagents .wow-icon-medium::after,
+.profession-skill-table-recipes .wow-icon-medium::after {
+    background-size: 100%
+}
+
+.profession-skill-table-reagents .wow-item-count,
+.profession-skill-table-recipes .wow-item-count {
+    right: 5px;
+    bottom: 1px
+}
+
+@media (max-width: 768px) {
+    .profession-item-table {
+        width: 625px
+    }
+}
+
+.class-spell-table td:first-child {
+    padding-left: 5px
+}
+
+@media (max-width: 768px) {
+    .class-spell-table {
+        width: calc(100vw + 180px)
+    }
+}
+
+@media (max-width: 768px) {
+    .class-quest-table {
+        width: calc(100vw + 260px)
+    }
+}
+
+.class-quest-table td {
+    line-height: 24px
+}
+
+.class-quest-table-quest .wow-quest {
+    max-width: 100%;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+@media (max-width: 768px) {
+    .class-quest-table-quest .wow-quest {
+        display: inline-block
+    }
+}
+
+@media (max-width: 768px) {
+    .class-quest-table-quest .source-marker {
+        margin-bottom: -2px;
+        transform: translateY(-2px)
+    }
+}
+
+.class-quest-table-quest .wow-quest-name {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+@media (max-width: 768px) {
+    .class-quest-table-quest .wow-quest-name {
+        display: inline;
+        white-space: normal;
+        line-height: 20px;
+        padding: 2px 0
+    }
+}
+
+.class-quest-table-difficulty {
+    font-size: 0.86rem;
+    font-weight: bold
+}
+
+.class-quest-table-difficulty span {
+    margin-left: 2px;
+    margin-right: 3px
+}
+
+@media (max-width: 768px) {
+    .hunter-pet-table {
+        width: calc(100vw + 465px)
+    }
+}
+
+.hunter-pet-table td.hunter-pet-table-abilities {
+    line-height: 24px
+}
+
+.hunter-pet-table .wow-npc {
+    display: inline-block;
+    white-space: normal;
+    line-height: 20px;
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.hunter-pet-table .wow-npc-name {
+    display: inline-block
+}
+
+.hunter-pet-table .wow-npc-classification {
+    display: inline-block
+}
+
+.hunter-pet-table-appearance img {
+    width: 75px;
+    height: 48px;
+    object-position: center;
+    object-fit: cover
+}
+
+.hunter-pet-table-level {
+    font-size: 0.92rem
+}
+
+.hunter-pet-table-source {
+    font-size: 0.93rem
+}
+
+.npc-display img {
+    width: 300px;
+    height: 300px
+}
+
+.npc-display div {
+    text-align: center
+}
+
+.npc-display-header-icon {
+    margin-left: 4px
+}
+
+.npc-display-header-label {
+    font-size: 12px;
+    line-height: 20px
+}
+
+@media (max-width: 768px) {
+    .hunter-pet-abilities-table {
+        width: calc(100vw + 180px)
+    }
+}
+
+.hunter-pet-abilities-table td:first-child {
+    padding-left: 5px
+}
+
+.hunter-pet-abilities-table-source {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 24px
+}
+
+.hunter-pet-abilities-table-tooltip {
+    line-height: 24px;
+    padding: 2px 6px;
+    font-size: 0.93rem
+}
+
+.hunter-pet-abilities-table-tooltip .wow-npc {
+    display: flex
+}
+
+.hunter-pet-abilities-source {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 24px
+}
+
+.hunter-pet-abilities-tooltip {
+    line-height: 24px;
+    padding: 2px 6px;
+    font-size: 0.93rem
+}
+
+.hunter-pet-abilities-tooltip .wow-npc {
+    display: flex
+}
+
+.hunter-pet-appearance-panel {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 12px -8px
+}
+
+@media (max-width: 768px) {
+    .hunter-pet-appearance-panel {
+        margin: 12px 0
+    }
+}
+
+.hunter-pet-appearance-item {
+    margin: 8px 8px 12px 8px
+}
+
+.hunter-pet-appearance-img {
+    width: 150px;
+    background: #151515;
+    border-radius: 8px;
+    overflow: hidden
+}
+
+.hunter-pet-appearance-img:hover,
+.hunter-pet-appearance-img.active {
+    box-shadow: 0 0 100px #000 inset
+}
+
+.hunter-pet-appearance-img img {
+    width: 150px;
+    height: 150px
+}
+
+.hunter-pet-appearance-source {
+    display: inline-block;
+    vertical-align: middle;
+    line-height: 24px
+}
+
+.hunter-pet-appearance-tooltip {
+    line-height: 24px;
+    padding: 2px 6px;
+    font-size: 0.93rem
+}
+
+.hunter-pet-appearance-tooltip .wow-npc {
+    display: flex
+}
+
+.maps-nav {
+    background: #000;
+    padding: 0 0 20px 0;
+    margin-right: -20px;
+    margin-bottom: -20px
+}
+
+.maps-nav .option__f-navigation {
+    line-height: 32px
+}
+
+.maps-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: auto
+}
+
+.maps-contents {
+    display: flex;
+    align-items: stretch;
+    max-width: 100%;
+    background: #111;
+    padding: 8px 0 8px 8px
+}
+
+.maps-map img,
+.maps-map canvas {
+    height: auto;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%
+}
+
+.maps-map svg {
+    height: auto
+}
+
+.maps-areas path {
+    stroke-width: 0;
+    fill: transparent
+}
+
+.maps-area-name {
+    position: absolute;
+    top: 3%;
+    left: 50%;
+    transform: translate(-50%, 0);
+    font-size: 30px;
+    text-shadow: 0 0 5px #000;
+    font-weight: 100
+}
+
+.maps-area-name:lang(zhcn) {
+    font-family: "仿宋"
+}
+
+.maps-icons {
+    position: relative;
+    width: 100%;
+    padding-top: 66.6667%
+}
+
+.maps-right {
+    display: flex;
+    flex-direction: column;
+    width: 320px;
+    height: 668px;
+    padding: 8px 8px 0
+}
+
+.maps-drop-modes {
+    margin-left: 8px;
+    margin-top: 14px
+}
+
+.maps-drop-modes button {
+    font-size: 13px;
+    height: 24px;
+    line-height: 22px;
+    padding: 0 8px
+}
+
+.maps-buttons {
+    margin-left: 8px
+}
+
+.maps-buttons button {
+    padding-left: 24px;
+    padding-right: 24px
+}
+
+.maps-list {
+    flex: 1;
+    margin-top: 16px;
+    margin-right: -8px;
+    margin-left: 8px;
+    overflow-y: auto
+}
+
+.maps-list-item {
+    display: flex;
+    align-items: center;
+    padding: 1px 12px 1px 8px;
+    border-top: 1px solid #1f1f1f
+}
+
+.maps-list-item:last-child {
+    border-bottom: 1px solid #1f1f1f
+}
+
+.maps-list-item:hover {
+    background: #1a1a1a
+}
+
+.maps-list-item>.wow-quest,
+.maps-list-item>.wow-npc,
+.maps-list-item>.wow-item,
+.maps-list-item>.wow-object {
+    flex: 1;
+    min-width: 0
+}
+
+.maps-list-item>.wow-quest,
+.maps-list-item>.wow-npc,
+.maps-list-item>.wow-object {
+    display: flex;
+    padding: 5px 0
+}
+
+.maps-list-item>.wow-item {
+    margin-left: -4px;
+    min-width: 60%
+}
+
+.maps-list-item>.wow-object {
+    margin-left: -4px
+}
+
+.maps-list-item .wow-quest-name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.maps-list-item-right {
+    font-size: 11px;
+    line-height: 15px;
+    color: #888;
+    margin-left: 12px;
+    margin-top: 2px;
+    text-align: right;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+}
+
+.maps-class-list {
+    display: flex;
+    margin: 16px 0 -4px 12px;
+    align-content: space-between
+}
+
+.maps-class-item {
+    margin: 0 1px 0 0;
+    opacity: 0.4
+}
+
+.maps-class-item.smaller {
+    margin: 0
+}
+
+.maps-class-item.smaller .wow-icon {
+    width: 26px;
+    height: 26px
+}
+
+.maps-class-item.smaller .wow-icon img {
+    width: 22px;
+    height: 22px
+}
+
+.maps-class-item.active,
+.maps-class-item:hover {
+    opacity: 1
+}
+
+.drops-tooltip {
+    max-width: none
+}
+
+.drops-tooltip-item {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #111
+}
+
+.drops-tooltip-rate {
+    color: #aaa;
+    padding-left: 8px;
+    padding-right: 6px;
+    margin-left: auto
+}
+
+.page {
+    width: 808px
+}
+
+@media (max-width: 768px) {
+    .page {
+        height: 100%
+    }
+}
+
+.page-top {
+    display: flex
+}
+
+@media (max-width: 768px) {
+    .page-top {
+        display: block
+    }
+}
+
+.page-left {
+    width: 501px
+}
+
+@media (max-width: 768px) {
+    .page-left {
+        width: auto
+    }
+}
+
+.page-right {
+    margin-left: auto;
+    max-width: 240px;
+    overflow: hidden
+}
+
+.page-tooltip-container {
+    display: flex
+}
+
+.page-icon-container {
+    margin-top: 2px
+}
+
+.page-tooltip {
+    display: block;
+    align-self: flex-start;
+    pointer-events: auto
+}
+
+.page .map {
+    margin-top: 3px;
+    margin-bottom: 3px
+}
+
+.page-properties {
+    flex: 0 1 auto;
+    align-self: flex-start;
+    width: 240px;
+    padding: 4px 6px;
+    margin-bottom: 8px
+}
+
+@media (max-width: 768px) {
+    .page-properties {
+        margin-top: 12px;
+        max-width: none;
+        width: auto;
+        display: inline-block;
+        vertical-align: top;
+        margin-bottom: 0
+    }
+}
+
+@media (max-width: 768px) {
+    .page-properties-plain-on-mobile {
+        display: block;
+        width: auto;
+        border: none;
+        padding: 0;
+        margin-top: 40px
+    }
+}
+
+.page-property-title {
+    font-size: 1rem;
+    color: #999;
+    padding-bottom: 6px;
+    margin-bottom: 6px;
+    border-bottom: 1px solid #333
+}
+
+.page-property-line {
+    line-height: 24px;
+    font-size: 0.93rem
+}
+
+.page-property-line-part:not(:last-child) {
+    margin-right: 5px
+}
+
+.page-section {
+    margin-top: 20px
+}
+
+.page-section-title {
+    border-bottom: 1px solid #333;
+    margin-bottom: 5px;
+    color: #999
+}
+
+.page-section-item {
+    font-size: 0.86rem;
+    line-height: 24px
+}
+
+.page-table {
+    min-height: 305px;
+    margin-top: 12px
+}
+
+.page-table td:first-child {
+    padding-left: 5px
+}
+
+.page-table-buttongroup {
+    margin-top: 16px
+}
+
+.page-table-container {
+    overflow-x: auto
+}
+
+.item-page .item-tooltip {
+    max-width: 437px
+}
+
+.item-page-book-content {
+    max-height: 300px;
+    overflow-y: auto;
+    line-height: 20px;
+    padding: 12px 0
+}
+
+.item-page-book-content header {
+    font-size: 20px;
+    margin-top: 38px
+}
+
+.item-page-book-content header:first-child {
+    margin-top: 0
+}
+
+.item-page-book-content img {
+    display: block;
+    margin-top: 8px
+}
+
+.item-page-book-content p {
+    padding: 24px 0
+}
+
+.item-page-book-content p:not(:first-child) {
+    border-top: 1px dashed #888
+}
+
+.skill-page .item-tooltip {
+    max-width: 437px
+}
+
+.spell-page .item-tooltip {
+    max-width: 437px
+}
+
+.quest-page-fixed-height {
+    min-height: 80vh
+}
+
+.quest-page-container {
+    display: flex
+}
+
+.quest-page-requirement {
+    line-height: 20px;
+    padding: 2px 0;
+    margin-bottom: 4px
+}
+
+.quest-page .quest-objectives {
+    margin-top: 4px;
+    margin-bottom: 10px
+}
+
+.quest-page .quest-maps {
+    margin: 12px 0
+}
+
+.quest-page-description {
+    line-height: 20px;
+    margin: 15px 0 12px 0
+}
+
+.quest-page-description>div {
+    margin: 10px 0
+}
+
+.quest-page-rewards {
+    line-height: 24px
+}
+
+.quest-page-difficulty span {
+    margin-right: 5px
+}
+
+.npc-page-name {
+    font-size: 1rem
+}
+
+.npc-page-react span {
+    margin-right: 4px
+}
+
+.npc-page-tag {
+    color: #9d9d9d
+}
+
+.npc-page .npc-source {
+    margin-top: 8px
+}
+
+.npc-page-drops-table {
+    min-width: 600px
+}
+
+.npc-page-sells-table {
+    min-width: 600px
+}
+
+.npc-page-sells-table .wow-cost {
+    line-height: 22px
+}
+
+.object-page-name {
+    font-size: 1rem;
+    line-height: 24px
+}
+
+.app-article {
+    display: flex;
+    overflow: hidden;
+    position: absolute;
+    z-index: 10;
+    top: 60px;
+    left: 0;
+    bottom: 0;
+    right: 0
+}
+
+@media (max-width: 768px) {
+    .app-article {
+        top: 50px
+    }
+}
+
+@media (max-width: 768px) {
+    .app-article-menu {
+        width: 0
+    }
+}
+
+.app-article h1 {
+    line-height: 50px;
+    margin: 34px 0 10px;
+    font-size: 30px;
+    text-align: left;
+    font-weight: 100
+}
+
+@media (max-width: 768px) {
+    .app-article h1 {
+        margin-top: 0;
+        margin-bottom: 0;
+        font-size: 20px
+    }
+}
+
+.app-article-section {
+    display: flex;
+    border-top: 1px solid #303030;
+    padding-bottom: 50px
+}
+
+.app-article h4 {
+    margin-top: 20px;
+    margin-right: 80px;
+    font-weight: 100;
+    line-height: 50px;
+    text-align: right;
+    width: 300px;
+    color: #aaa
+}
+
+@media (max-width: 768px) {
+    .app-article h4 {
+        writing-mode: vertical-lr;
+        text-align: start;
+        margin-right: 30px;
+        margin-top: 28px;
+        width: 24px;
+        line-height: 24px;
+        letter-spacing: 6px
+    }
+}
+
+.app-article h5 {
+    margin-top: 36px;
+    font-weight: 100
+}
+
+.app-article-text {
+    flex: 1;
+    padding-top: 10px;
+    text-align: justify;
+    overflow: hidden
+}
+
+@media (max-width: 768px) {
+    .app-article-text {
+        padding-top: 0
+    }
+}
+
+.app-article-popup {
+    max-width: none;
+    padding: 2px;
+    overflow: hidden
+}
+
+@media (max-width: 768px) {
+    .app-article-popup {
+        max-width: 100%
+    }
+}
+
+.app-article-popup-image {
+    display: block;
+    width: 550px;
+    height: 440px
+}
+
+@media (max-width: 768px) {
+    .app-article-popup-image {
+        width: calc(100vw - 20px);
+        height: calc(80vw - 16px)
+    }
+}
+
+.app-article p {
+    margin: 24px 0;
+    font-weight: 100;
+    line-height: 24px;
+    color: #ddd;
+    font-size: 1.08rem
+}
+
+.app-article p img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    image-rendering: -webkit-optimize-contrast;
+    margin: 24px 0
+}
+
+.app-article-images {
+    display: flex;
+    margin-left: -6px;
+    margin-right: -6px;
+    width: 100%;
+    flex-wrap: wrap
+}
+
+.app-article-images img {
+    flex: 1;
+    max-width: none;
+    min-width: 0;
+    margin: 0 6px;
+    height: auto
+}
+
+@media (max-width: 768px) {
+    .app-article-images {
+        display: block;
+        margin: 0
+    }
+
+    .app-article-images img {
+        max-width: 100%;
+        height: auto;
+        margin: 12px 0
+    }
+}
+
+.app-favourite-nav {
+    margin-top: 15px;
+    overflow-x: auto
+}
+
+.app-favourite-wrapper {
+    display: flex;
+    flex-direction: column
+}
+
+.app-favourite-section {
+    flex-direction: column;
+    flex: 1
+}
+
+.app-favourite-container {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    margin-top: 20px
+}
+
+@media (max-width: 768px) {
+    .app-favourite-container {
+        overflow-x: auto
+    }
+}
+
+.app-favourite .favourite-table {
+    min-width: 700px;
+    flex: 1
+}
+
+.favourite-table-name-col .wow-quest {
+    padding-top: 10px;
+    padding-bottom: 10px
+}
+
+.favourite-table-type-col {
+    opacity: 0.75;
+    font-size: 12px
+}
+
+.favourite-table-operation-col f-icon {
+    display: none;
+    padding: 7.5px
+}
+
+.favourite-table-operation-col:hover f-icon {
+    display: inline-flex
+}
+
+.app-issues {
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    flex: 1
+}
+
+.app-issues h1 {
+    line-height: 112px;
+    margin-top: 0;
+    text-align: left
+}
+
+.app-issues-wrapper {
+    overflow: hidden;
+    overflow-y: auto;
+    padding: 0 10%
+}
+
+.app-issues h4 {
+    margin-top: 72px;
+    margin-bottom: 12px;
+    font-weight: 100;
+    line-height: 50px;
+    border-top: 1px solid #5a5a5a
+}
+
+.app-issues p {
+    margin: 12px 0;
+    font-weight: 100;
+    line-height: 24px;
+    color: #ddd;
+    font-size: 1.08rem
+}
+
+.settings {
+    width: 750px;
+    height: 500px
+}
+
+@media (max-width: 768px) {
+    .settings {
+        height: 530px
+    }
+}
+
+.settings .content__app-settings {
+    padding: 0 20px 0 0
+}
+
+.settings-body {
+    display: flex;
+    align-items: stretch;
+    height: 100%
+}
+
+@media (max-width: 768px) {
+    .settings-body {
+        flex-direction: column
+    }
+}
+
+.settings-nav {
+    width: 196px;
+    padding: 16px 0 16px 20px;
+    background: #161616
+}
+
+@media (max-width: 768px) {
+    .settings-nav {
+        display: flex;
+        width: auto
+    }
+}
+
+.settings .option__f-navigation {
+    padding-top: 0;
+    padding-bottom: 0;
+    line-height: 40px;
+    border-color: #202020
+}
+
+.settings .option__f-navigation.active__f-navigation::after {
+    top: 0;
+    bottom: 0;
+    opacity: 0.5
+}
+
+@media (max-width: 768px) {
+    .settings .option__f-navigation.active__f-navigation::after {
+        height: 2px;
+        width: auto;
+        top: auto;
+        left: 0;
+        right: 0
+    }
+}
+
+@media (max-width: 768px) {
+    .settings .option__f-navigation {
+        flex: 1;
+        border: none;
+        text-align: center
+    }
+}
+
+.settings-tabs {
+    flex: 1;
+    overflow-y: auto
+}
+
+.settings-tab {
+    padding: 0 0 15px 20px
+}
+
+.settings-line {
+    display: flex;
+    align-items: center;
+    padding: 13px 0
+}
+
+.settings-line:not(:last-child) {
+    border-bottom: 1px solid #222222
+}
+
+@media (max-width: 768px) {
+    .settings-line {
+        border-top: 1px solid #222222;
+        border-bottom: none
+    }
+}
+
+.settings-line span {
+    display: inline-block;
+    width: 330px;
+    line-height: 20px;
+    padding: 4px 20px 4px 0;
+    color: #e5e5e5
+}
+
+@media (max-width: 768px) {
+    .settings-line span {
+        width: calc(100vw - 160px)
+    }
+}
+
+.settings-line f-select,
+.settings-line side-select,
+.settings-line class-select,
+.settings-line quality-select {
+    flex: 1
+}

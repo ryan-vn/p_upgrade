@@ -116,29 +116,6 @@ export const isMy = (id) => {
   return id === window.localStorage.getItem('userId');
 };
 
-// export const serverListGlobal = [
-//   {
-//     group: '台服',
-//     name: '伊弗斯',
-//     type: 'PVP'
-//   },
-//   {
-//     group: '台服',
-//     name: '玛拉顿',
-//     type: 'PVE'
-//   },
-//   {
-//     group: '全球服',
-//     name: '阿拉希盆地',
-//     type: 'PVP'
-//   },
-//   {
-//     group: '全球服',
-//     name: '鱼人',
-//     type: 'PVE'
-//   }
-// ];
-
 export const serverList = [
   {
     group: '一区',

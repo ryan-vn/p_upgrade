@@ -13,7 +13,7 @@ import cookingData from './api/cooking.json';
 
 import { getTimeDesc, isMy, randomString, getUserId, serverList, getServerListOptions, professionListOptions, sideListOptions } from './util';
 
-import { genFileName, uploadFile, getTargetProfessionData, getFileList } from './util/uploadOss';
+// import { genFileName, uploadFile, getTargetProfessionData, getFileList } from './util/uploadOss';
 
 import Select from './components/Select';
 
@@ -42,6 +42,19 @@ import PriceDataPanel from './components/PriceDataPanel';
 // "7": tailoring,
 // "8": leatherworking,
 // "9": enchanting,
+
+// export const profession_ids_map = {
+//   "1": cooking,
+//   "2": alchemy,
+//   "3": blacksmithing,
+//   "4": engineering,
+//   "5": inscription,
+//   "6": jewel,
+//   "7": tailoring,
+//   "8": leatherworking,
+//   "9": enchanting,
+// };
+
 const professionsTypeArr = [
   "烹饪",
   "炼金术",
@@ -54,6 +67,7 @@ const professionsTypeArr = [
   '附魔',
 ];
 const professionsDataArr = [
+  [],
   cookingData,
   alchemyData,
   blacksmithingData,
@@ -150,7 +164,11 @@ const App = () => {
   }, [priceData]);
 
   useEffect(() => {
+
+    console.log(userConfig.professionType);
+
     if (userConfig.professionType || userConfig.professionType === 0) {
+
 
       const _itemsStatus = {};
 
@@ -260,68 +278,68 @@ const App = () => {
   const loadPriceDataList = () => {
     const { server, side, professionType } = userConfig;
 
-    setListStatus('loading');
+    // setListStatus('loading');
 
-    getTargetProfessionData({
-      server,
-      side,
-      professionType,
-    }).then(res => {
-      let _arr = res.objects || [];
+    // getTargetProfessionData({
+    //   server,
+    //   side,
+    //   professionType,
+    // }).then(res => {
+    //   let _arr = res.objects || [];
 
-      let _targetArr = [];
+    //   let _targetArr = [];
 
-      for (let i = 0; i < _arr.length; i++) {
-        let [_prefix, _type, _side, _server, _start, _end, _userId, _timeWithSuffix, _lengthWithSuffix] = _arr[i].name.split('-');
+    //   for (let i = 0; i < _arr.length; i++) {
+    //     let [_prefix, _type, _side, _server, _start, _end, _userId, _timeWithSuffix, _lengthWithSuffix] = _arr[i].name.split('-');
 
-        const _time = parseInt(_timeWithSuffix.split('.')[0]);
+    //     const _time = parseInt(_timeWithSuffix.split('.')[0]);
 
-        const _length = parseInt((_lengthWithSuffix || '').split('.')[0]);
+    //     const _length = parseInt((_lengthWithSuffix || '').split('.')[0]);
 
-        const _current = new Date().getTime();
+    //     const _current = new Date().getTime();
 
-        // 只显示两个月内
-        // 只显示响应的点数范围内的
-        // 最多选5条
+    //     // 只显示两个月内
+    //     // 只显示响应的点数范围内的
+    //     // 最多选5条
 
-        if ((_current - _time < 5184000000)) {
-          _targetArr.push({
-            userId: _userId,
-            time: _time,
-            server: parseInt(_server),
-            side: parseInt(_side),
-            start: _start,
-            end: _end,
-            profession: parseInt(_type),
-            status: 'init',
-            length: _length,
-            url: _arr[i].url,
-            isChecked: false,
-          });
-        }
+    //     if ((_current - _time < 5184000000)) {
+    //       _targetArr.push({
+    //         userId: _userId,
+    //         time: _time,
+    //         server: parseInt(_server),
+    //         side: parseInt(_side),
+    //         start: _start,
+    //         end: _end,
+    //         profession: parseInt(_type),
+    //         status: 'init',
+    //         length: _length,
+    //         url: _arr[i].url,
+    //         isChecked: false,
+    //       });
+    //     }
 
-      }
+    //   }
 
-      const _resArr = _targetArr.sort((a, b) => b.time - a.time).slice(0, 5);
+    //   const _resArr = _targetArr.sort((a, b) => b.time - a.time).slice(0, 5);
 
-      _resArr[0] && (_resArr[0].isChecked = true);
+    //   _resArr[0] && (_resArr[0].isChecked = true);
 
-      _resArr[1] && (_resArr[1].isChecked = true);
+    //   _resArr[1] && (_resArr[1].isChecked = true);
 
-      _resArr[2] && (_resArr[2].isChecked = true);
+    //   _resArr[2] && (_resArr[2].isChecked = true);
 
-      setPriceDataList(_resArr);
+    //   setPriceDataList(_resArr);
 
-      setListStatus('ok');
+    //   setListStatus('ok');
 
-      // if (!_resArr.length) {
-      //   setPriceManual(true);
-      // }
+    //   // if (!_resArr.length) {
+    //   //   setPriceManual(true);
+    //   // }
 
-    }).catch(e => {
-      console.log(e);
-      setListStatus('error');
-    });
+    // }).catch(e => {
+    //   console.log(e);
+    //   setListStatus('error');
+    // });
   };
 
   const genShoppingList = () => {
@@ -395,113 +413,14 @@ const App = () => {
     return (professionType || professionType === 0) && (server || server === 0) && (side || side === 0);
   };
 
-  const handleImportPriceData = () => {
-
-    if (!(importDataStr || '').trim()) {
-      // alert('价格数据不能为空！');
-
-      setMessages(_prev => ([..._prev, <Message key={Math.random()} type="error" duration={3000} content="价格数据不能为空！" />]));
-
-      return;
-    }
-
-    if (importDataStr.indexOf(';;;;;;;;;') > -1) {
-      // alert('导出数据时请点击插件右下角"导出结果"按钮，而非右上角"导出"按钮！');
-
-      setMessages(_prev => ([..._prev, <Message key={Math.random()} type="error" duration={5000} content='导出数据时请点击插件右下角"导出结果"按钮，而非右上角"导出"按钮！' />]));
-
-
-      return;
-    }
-
-    const _arr = importDataStr.split('\n');
-
-    if (_arr.length) {
-      if (_arr[0].indexOf('名称') > -1 || _arr[0].indexOf('名稱') > -1) {
-        _arr.shift();
-      }
-    } else {
-      // alert('请检查数据格式是否符合要求！');
-
-      setMessages(_prev => ([..._prev, <Message key={Math.random()} type="error" duration={3000} content="请检查数据格式是否符合要求！" />]));
-
-
-      return;
-    }
-
-    // 判断结构是否正确  priceData
-
-    const _current = new Date().getTime();
-
-    const { professionType, server, side } = userConfig;
-
-    let _priceData = {
-      userId: getUserId(),
-      time: _current,
-      server,
-      side,
-      start: 1,
-      end: 450,
-      profession: professionType,
-      status: 'ok',
-      length: _arr.length,
-      isChecked: true,
-    };
-
-    for (let i = 0; i < _arr.length; i++) {
-
-      const _item = _arr[i];
-
-      const [price, name] = _item.split(',');
-
-      if (name && (parseInt(price) || price === '0')) {
-        // _priceData[name.replace('卷轴：', '')] = parseInt(price);
-        // .replace(/(\s+\(\d+\)|")/g, '')
-        // _priceData[name.replace(/"/g, '')] = parseInt(price);
-        _priceData[name.replace(/(\s+\(\d+\)|")/g, '')] = parseInt(price);
-      } else {
-        // alert('数据解析失败，请检查数据格式是否符合要求！');
-
-        setMessages(_prev => ([..._prev, <Message key={Math.random()} type="error" duration={3000} content="数据解析失败，请检查数据格式是否符合要求！" />]));
-
-        return;
-      }
-
-    }
-
-    setPriceManual(false);
-
-    setImportModalShow(false);
-
-    setImportDataStr('');
-
-    setPriceDataList(prev => {
-      const arr = [_priceData, ...prev];
-
-      return arr;
-    });
-
-    console.log('上传价格数据');
-
-    uploadFile(genFileName({
-      server,
-      side,
-      professionType,
-      time: _current,
-      start: 1,
-      end: 450,
-      userId: getUserId(),
-      length: _arr.length,
-    }), JSON.stringify(_priceData));
-  };
-
   const handleGenUpgradePath = async () => {
     if (stick) return;
     setStick(true);
   
     // 新API地址拼接
-    const { professionType, server, side } = userConfig;
-    const url = `http://localhost:7890/auction-history/profession-upgrade/${server}/${side+1}/${professionType}`;
+    const { professionType, server=2, side } = userConfig;
+    debugger;
+    const url = `https://auction-api.wekic.com/auction-history/profession-upgrade/29/${1}/${1}`;
   
     try {
       const res = await fetch(url);
@@ -1973,16 +1892,6 @@ const App = () => {
             }} />
 
           </div>
-
-          <div className="panel-footer justify-between" >
-            <div className="btn" onClick={() => {
-              setImportModalShow(false);
-              setImportDataStr('');
-            }}>取消</div>
-
-            <div className="btn btn-primary" onClick={handleImportPriceData}>确定</div>
-          </div>
-
         </div>
       </div> : null
     }

@@ -1,4 +1,4 @@
-import react, { useEffect, useReducer, useRef, useCallback } from 'react';
+import react, { useEffect, useRef, useCallback } from 'react';
 import './App.scss';
 import ItemWithTip from './components/ItemWithTip';
 import engineeringData from './api/engineering.json';
@@ -16,6 +16,8 @@ import { getServerListOptions, professionListOptions, sideListOptions } from './
 import Select from './components/Select';
 
 import Message from './components/Message';
+
+import { useProfessionState, ACTIONS } from './hooks/useProfessionState';
 
 // 工程学 附魔 炼金术  裁缝 制皮 锻造 珠宝加工 铭文
 const professionsTypeArr = ['工程学', '附魔', '炼金术', '裁缝', '制皮', '锻造', '珠宝加工', '铭文', '烹饪'];
@@ -39,100 +41,8 @@ if (!hasReStore) {
   window.localStorage.setItem('hasReStore', 'ok');
 }
 
-// 定义 action 类型
-const ACTIONS = {
-  SET_PRICE_MANUAL: 'SET_PRICE_MANUAL',
-  SET_PRICE_DATA_LIST: 'SET_PRICE_DATA_LIST',
-  SET_USER_CONFIG: 'SET_USER_CONFIG',
-  UPDATE_USER_CONFIG: 'UPDATE_USER_CONFIG',
-  SET_LIST_STATUS: 'SET_LIST_STATUS',
-  SET_IMPORT_MODAL_SHOW: 'SET_IMPORT_MODAL_SHOW',
-  SET_IMPORT_DATA_STR: 'SET_IMPORT_DATA_STR',
-  SET_MESSAGES: 'SET_MESSAGES',
-  ADD_MESSAGE: 'ADD_MESSAGE',
-  SET_STICK: 'SET_STICK',
-  SET_PRICE_DATA: 'SET_PRICE_DATA',
-  SET_MATERIAL_MODAL_SHOW: 'SET_MATERIAL_MODAL_SHOW',
-  SET_PATH_DATA: 'SET_PATH_DATA',
-  SET_PROCESS_INDEX: 'SET_PROCESS_INDEX',
-  SET_PROCESS_STOP: 'SET_PROCESS_STOP',
-  SET_HOVER_ITEM: 'SET_HOVER_ITEM',
-  SET_HIGHLIGHT_ITEM: 'SET_HIGHLIGHT_ITEM',
-  SET_LOADING_GLOBAL: 'SET_LOADING_GLOBAL',
-  SET_LOADING_PRICE_DATA: 'SET_LOADING_PRICE_DATA',
-  SET_PRICEDATA_ERROR: 'SET_PRICEDATA_ERROR',
-};
-
-const initialState = {
-  priceManual: false,
-  priceDataList: [],
-  userConfig: JSON.parse(window.localStorage.getItem('userConfig') || '{}'),
-  listStatus: 'init',
-  importModalShow: false,
-  importDataStr: '',
-  messages: [],
-  stick: false,
-  priceData: JSON.parse(window.localStorage.getItem('priceData') || '{}'),
-  materialModalShow: false,
-  pathData: undefined,
-  processIndex: 1,
-  processStop: false,
-  hoverItem: null,
-  highLightItem: null,
-  loadingGlobal: false,
-  loadingPriceData: false,
-  priceDataError: false,
-};
-
-function reducer(state, action) {
-  switch (action.type) {
-    case ACTIONS.SET_PRICE_MANUAL:
-      return { ...state, priceManual: action.payload };
-    case ACTIONS.SET_PRICE_DATA_LIST:
-      return { ...state, priceDataList: action.payload };
-    case ACTIONS.SET_USER_CONFIG:
-      return { ...state, userConfig: action.payload };
-    case ACTIONS.UPDATE_USER_CONFIG:
-      return { ...state, userConfig: { ...state.userConfig, ...action.payload } };
-    case ACTIONS.SET_LIST_STATUS:
-      return { ...state, listStatus: action.payload };
-    case ACTIONS.SET_IMPORT_MODAL_SHOW:
-      return { ...state, importModalShow: action.payload };
-    case ACTIONS.SET_IMPORT_DATA_STR:
-      return { ...state, importDataStr: action.payload };
-    case ACTIONS.SET_MESSAGES:
-      return { ...state, messages: action.payload };
-    case ACTIONS.ADD_MESSAGE:
-      return { ...state, messages: [...state.messages, action.payload] };
-    case ACTIONS.SET_STICK:
-      return { ...state, stick: action.payload };
-    case ACTIONS.SET_PRICE_DATA:
-      return { ...state, priceData: action.payload };
-    case ACTIONS.SET_MATERIAL_MODAL_SHOW:
-      return { ...state, materialModalShow: action.payload };
-    case ACTIONS.SET_PATH_DATA:
-      return { ...state, pathData: action.payload };
-    case ACTIONS.SET_PROCESS_INDEX:
-      return { ...state, processIndex: action.payload };
-    case ACTIONS.SET_PROCESS_STOP:
-      return { ...state, processStop: action.payload };
-    case ACTIONS.SET_HOVER_ITEM:
-      return { ...state, hoverItem: action.payload };
-    case ACTIONS.SET_HIGHLIGHT_ITEM:
-      return { ...state, highLightItem: action.payload };
-    case ACTIONS.SET_LOADING_GLOBAL:
-      return { ...state, loadingGlobal: action.payload };
-    case ACTIONS.SET_LOADING_PRICE_DATA:
-      return { ...state, loadingPriceData: action.payload };
-    case ACTIONS.SET_PRICEDATA_ERROR:
-      return { ...state, priceDataError: action.payload };
-    default:
-      return state;
-  }
-}
-
 const App = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useProfessionState();
   const shoppingListEl = useRef(null);
   const materialListEl = useRef(null);
 
@@ -193,13 +103,9 @@ const App = () => {
       dispatch({ type: ACTIONS.SET_LOADING_PRICE_DATA, payload: true });
       dispatch({ type: ACTIONS.SET_PRICEDATA_ERROR, payload: false });
       console.log("state.userConfig.professionType",state.userConfig.professionType )
-      fetch(`https://auction-api.wekic.com/auction-history/profession-upgrade/29/1/9`, {
+      fetch(`https://auction-api.wekic.com/auction-history/profession-upgrade/${state.userConfig.professionType}/${state.userConfig.server}/${state.userConfig.side}`, {
         headers: {
-          Authorization: 'Bearer ',
-          identifier: '100002_vincent',
-          platform: 'web',
           'game-version': 'wlk',
-          version: 'swagger',
           Accept: '*/*',
           Host: 'auction-api.wekic.com',
           Connection: 'keep-alive',
@@ -1254,76 +1160,48 @@ const App = () => {
   };
 
   return <main className="app-main">
-
     {
-      state.userConfig.step === 1 || !state.userConfig.step ? <div className="panel-static" style={{ marginTop: -20 }}>
-        <div className="panel-title">请选择专业、服务器、阵营</div>
-
-        <div className="panel-body">
-
-          <div className="config-staic-form">
-            <p className="form-label">专业</p>
-            <Select value={state.userConfig.professionType} className="form-input select-primary" placeholder="选择专业" data={professionListOptions} onChange={
-              (value) => {
-                dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { professionType: value } });
-              }
-            }
-            />
-
-            <p className="form-label">服务器</p>
-
-            <Select
-              className="form-input select-primary"
-              placeholder="选择服务器, 可使用关键字检索"
-              data={getServerListOptions()}
-              value={state.userConfig.server}
-              search={true}
-              onChange={
-                (value) => {
-                  dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { server: value } });
-                }
-              } />
-
-            <p className="form-label">阵营</p>
-
-
-            <Select
-              className="form-input select-primary"
-              placeholder="选择阵营"
-              data={sideListOptions}
-              value={state.userConfig.side}
-              onChange={
-                (value) => {
-                  dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { side: value } });
-                }
-              } />
-
-          </div>
-
-        </div>
-
-        <div className="panel-footer justify-center">
-          {/* <div className="btn">上一步</div> */}
-          <div className={step1Enabled() ? "btn btn-primary" : "btn btn-disabled"} onClick={
-            () => {
-              if (step1Enabled()) {
-                dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { step: 2 } });
-              }
-            }
-          }>下一步</div>
-        </div>
-
-      </div> : null
-    }
-
-    {
-      state.userConfig.step === 2 ? (
-        <div className="panel-static select-none panel-price-list" style={{ width: 800 }}>
-          <div className="panel-title">选择价格数据</div>
+      state.userConfig.step === 1 || !state.userConfig.step ? (
+        <div className="panel-static" style={{ marginTop: -20 }}>
+          <div className="panel-title">请选择专业、服务器、阵营</div>
           <div className="panel-body">
-            <div className="config-staic-form" style={{ gridRowGap: 10 }}>
+            <div className="config-staic-form">
+              <p className="form-label">专业</p>
+              <Select value={state.userConfig.professionType} className="form-input select-primary" placeholder="选择专业" data={professionListOptions} onChange={
+                (value) => {
+                  dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { professionType: value } });
+                }
+              }
+              />
+              <p className="form-label">服务器</p>
+              <Select
+                className="form-input select-primary"
+                placeholder="选择服务器, 可使用关键字检索"
+                data={getServerListOptions()}
+                value={state.userConfig.server}
+                search={true}
+                onChange={
+                  (value) => {
+                    dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { server: value } });
+                  }
+                } />
+              <p className="form-label">阵营</p>
+              <Select
+                className="form-input select-primary"
+                placeholder="选择阵营"
+                data={sideListOptions}
+                value={state.userConfig.side}
+                onChange={
+                  (value) => {
+                    dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { side: value } });
+                  }
+                } />
+            </div>
+            <div className="config-staic-form" style={{ gridRowGap: 10, marginTop: 30 }}>
               <p className="form-label">云端价格数据</p>
-              {state.loadingPriceData ? (
+              {state.userConfig.professionType == null || state.userConfig.server == null || state.userConfig.side == null ? (
+                <div style={{ padding: 20, textAlign: 'center', color: '#888' }}>请先选择专业、服务器和阵营</div>
+              ) : state.loadingPriceData ? (
                 <div style={{ padding: 20, textAlign: 'center' }}>正在获取最新价格数据...</div>
               ) : state.priceDataError ? (
                 <div style={{ padding: 20, color: 'red', textAlign: 'center' }}>{state.priceDataError}</div>
@@ -1335,21 +1213,17 @@ const App = () => {
               </div>
             </div>
           </div>
-          <div className="panel-footer justify-between" style={{ padding: '10px 40px 30px' }}>
-            <div className="btn" onClick={() => {
-              dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { step: 1 } });
-            }}>上一步</div>
+          <div className="panel-footer justify-center">
             <div className={state.priceData && Object.keys(state.priceData).length ? 'btn btn-primary' : 'btn btn-disabled'}
-              onClick={state.priceData && Object.keys(state.priceData).length ? handleGenUpgradePath : undefined}>
+              onClick={state.priceData && Object.keys(state.priceData).length ? () => dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { step: 2 } }) : undefined}>
               计算冲级路线
             </div>
           </div>
         </div>
       ) : null
     }
-
     {
-      state.userConfig.step === 3 ? <div className="panel-main" >
+      state.userConfig.step === 2 ? <div className="panel-main" >
         <div className="panel-header">
           <div className="logo" />
 

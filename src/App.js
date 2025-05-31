@@ -1,6 +1,15 @@
 import react, { useEffect, useRef, useCallback } from 'react';
 import './App.scss';
 import ItemWithTip from './components/ItemWithTip';
+import engineeringData from './api/engineering.json';
+import enchantingData from './api/enchanting.json';
+import alchemyData from './api/alchemy.json';
+import tailoringData from './api/tailoring.json';
+import leatherworkingData from './api/leatherworking.json';
+import blacksmithingData from './api/blacksmithing.json';
+import jewelcraftingData from './api/jewelcrafting.json';
+import inscriptionData from './api/inscription.json';
+import cookingData from './api/cooking.json';
 
 import { getServerListOptions, professionListOptions, sideListOptions } from './util';
 
@@ -9,7 +18,18 @@ import Select from './components/Select';
 import Message from './components/Message';
 
 import { useProfessionState, ACTIONS } from './hooks/useProfessionState';
-import { professionsTypeArr, professionsDataArr, reputationMap } from './config/appConfig';
+
+// 工程学 附魔 炼金术  裁缝 制皮 锻造 珠宝加工 铭文
+const professionsTypeArr = ['工程学', '附魔', '炼金术', '裁缝', '制皮', '锻造', '珠宝加工', '铭文', '烹饪'];
+const professionsDataArr = [engineeringData, enchantingData, alchemyData, tailoringData, leatherworkingData, blacksmithingData, jewelcraftingData, inscriptionData, cookingData];
+
+const reputationMap = {
+  3: '中立',
+  4: '友善',
+  5: '尊敬',
+  6: '崇敬',
+  7: '崇拜',
+};
 
 let hasReStore = window.localStorage.getItem('hasReStore');
 
@@ -83,7 +103,7 @@ const App = () => {
       dispatch({ type: ACTIONS.SET_LOADING_PRICE_DATA, payload: true });
       dispatch({ type: ACTIONS.SET_PRICEDATA_ERROR, payload: false });
       console.log("state.userConfig.professionType",state.userConfig.professionType )
-      fetch(`https://auction-api.wekic.com/auction-history/profession-upgrade/${state.userConfig.professionType}/${state.userConfig.server}/${state.userConfig.side}`, {
+      fetch(`https://auction-api.wekic.com/auction-history/profession-upgrade/29/1/9`, {
         headers: {
           'game-version': 'wlk',
           Accept: '*/*',
@@ -1140,48 +1160,76 @@ const App = () => {
   };
 
   return <main className="app-main">
+
     {
-      state.userConfig.step === 1 || !state.userConfig.step ? (
-        <div className="panel-static" style={{ marginTop: -20 }}>
-          <div className="panel-title">请选择专业、服务器、阵营</div>
-          <div className="panel-body">
-            <div className="config-staic-form">
-              <p className="form-label">专业</p>
-              <Select value={state.userConfig.professionType} className="form-input select-primary" placeholder="选择专业" data={professionListOptions} onChange={
-                (value) => {
-                  dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { professionType: value } });
-                }
+      state.userConfig.step === 1 || !state.userConfig.step ? <div className="panel-static" style={{ marginTop: -20 }}>
+        <div className="panel-title">请选择专业、服务器、阵营</div>
+
+        <div className="panel-body">
+
+          <div className="config-staic-form">
+            <p className="form-label">专业</p>
+            <Select value={state.userConfig.professionType} className="form-input select-primary" placeholder="选择专业" data={professionListOptions} onChange={
+              (value) => {
+                dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { professionType: value } });
               }
-              />
-              <p className="form-label">服务器</p>
-              <Select
-                className="form-input select-primary"
-                placeholder="选择服务器, 可使用关键字检索"
-                data={getServerListOptions()}
-                value={state.userConfig.server}
-                search={true}
-                onChange={
-                  (value) => {
-                    dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { server: value } });
-                  }
-                } />
-              <p className="form-label">阵营</p>
-              <Select
-                className="form-input select-primary"
-                placeholder="选择阵营"
-                data={sideListOptions}
-                value={state.userConfig.side}
-                onChange={
-                  (value) => {
-                    dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { side: value } });
-                  }
-                } />
-            </div>
-            <div className="config-staic-form" style={{ gridRowGap: 10, marginTop: 30 }}>
+            }
+            />
+
+            <p className="form-label">服务器</p>
+
+            <Select
+              className="form-input select-primary"
+              placeholder="选择服务器, 可使用关键字检索"
+              data={getServerListOptions()}
+              value={state.userConfig.server}
+              search={true}
+              onChange={
+                (value) => {
+                  dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { server: value } });
+                }
+              } />
+
+            <p className="form-label">阵营</p>
+
+
+            <Select
+              className="form-input select-primary"
+              placeholder="选择阵营"
+              data={sideListOptions}
+              value={state.userConfig.side}
+              onChange={
+                (value) => {
+                  dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { side: value } });
+                }
+              } />
+
+          </div>
+
+        </div>
+
+        <div className="panel-footer justify-center">
+          {/* <div className="btn">上一步</div> */}
+          <div className={step1Enabled() ? "btn btn-primary" : "btn btn-disabled"} onClick={
+            () => {
+              if (step1Enabled()) {
+                dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { step: 2 } });
+              }
+            }
+          }>下一步</div>
+        </div>
+
+      </div> : null
+    }
+
+    {
+      state.userConfig.step === 2 ? (
+        <div className="panel-static select-none panel-price-list" style={{ width: 800 }}>
+          <div className="panel-title">选择价格数据</div>
+          <div className="panel-body">
+            <div className="config-staic-form" style={{ gridRowGap: 10 }}>
               <p className="form-label">云端价格数据</p>
-              {state.userConfig.professionType == null || state.userConfig.server == null || state.userConfig.side == null ? (
-                <div style={{ padding: 20, textAlign: 'center', color: '#888' }}>请先选择专业、服务器和阵营</div>
-              ) : state.loadingPriceData ? (
+              {state.loadingPriceData ? (
                 <div style={{ padding: 20, textAlign: 'center' }}>正在获取最新价格数据...</div>
               ) : state.priceDataError ? (
                 <div style={{ padding: 20, color: 'red', textAlign: 'center' }}>{state.priceDataError}</div>
@@ -1193,17 +1241,21 @@ const App = () => {
               </div>
             </div>
           </div>
-          <div className="panel-footer justify-center">
+          <div className="panel-footer justify-between" style={{ padding: '10px 40px 30px' }}>
+            <div className="btn" onClick={() => {
+              dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { step: 1 } });
+            }}>上一步</div>
             <div className={state.priceData && Object.keys(state.priceData).length ? 'btn btn-primary' : 'btn btn-disabled'}
-              onClick={state.priceData && Object.keys(state.priceData).length ? () => dispatch({ type: ACTIONS.UPDATE_USER_CONFIG, payload: { step: 2 } }) : undefined}>
+              onClick={state.priceData && Object.keys(state.priceData).length ? handleGenUpgradePath : undefined}>
               计算冲级路线
             </div>
           </div>
         </div>
       ) : null
     }
+
     {
-      state.userConfig.step === 2 ? <div className="panel-main" >
+      state.userConfig.step === 3 ? <div className="panel-main" >
         <div className="panel-header">
           <div className="logo" />
 

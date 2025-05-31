@@ -261,6 +261,8 @@ const App = () => {
 
     const gold = Math.floor(price * count / 10000);
 
+    // console.log(gold, siliver, tong);
+
     return <span style={{ fontSize: 12 }}>{gold ? <span className="coin-gold" style={{ color: '#ffc800' }}>{gold}</span> : ''}{siliver ? <span className="coin-silver" style={{ color: '#eee' }}>{siliver}</span> : ''}{tong ? <span className="coin-copper" style={{ color: '#ff8d00' }}>{tong}</span> : ''}{isSellPrice ? <span className='trade-tag'>商</span> : ''}{isNagative ? <span className='trade-tag'>赚</span> : ''}</span>
 
   };
@@ -401,7 +403,7 @@ const App = () => {
 
     reagents.forEach(reagent => {
 
-      let _price = getReagentPrice(reagent, true, true) || 0;
+      let _price = Number(getReagentPrice(reagent, true, true)) || 0;
 
       if (!_price) {
         const _it = professionsDataArr[state.userConfig.professionType].find(it => it.creates?.id === reagent.id);
@@ -412,7 +414,7 @@ const App = () => {
               if (isMiss) {
                 _price = 0;
               } else {
-                _price = _need.total;
+                _price = Number(_need.total);
               }  
             }else{
               // console.log("过度递归");
@@ -422,7 +424,7 @@ const App = () => {
           }
       }
 
-      total += _price * reagent.count;
+      total += Number(_price) * Number(reagent.count);
 
       if (!_price) {
         isMiss = true;
@@ -430,13 +432,13 @@ const App = () => {
     });
 
     if (single) {
-      total = Math.round(total / (item.creates?.count || 1));
+      total = Math.round(total / (Number(item.creates?.count) || 1));
     }
 
     if (pure) {
 
       return {
-        total,
+        total: Number(total),
         isMiss
       };
     }
@@ -936,10 +938,10 @@ const App = () => {
           quality: itemArr[i].creates?.quality || 0
         });
 
-        total += cost;
+        total += Math.ceil(cost);
       }
 
-      total += resItem.cost;
+      total += Math.ceil(resItem.cost);
 
       i = i + j - 1;
 

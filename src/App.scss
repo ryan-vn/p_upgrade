@@ -143,10 +143,11 @@ body, #root {
         display: flex;
         align-items: center;
         min-width: 0;
-        &.col-name { flex: 2 1 0; min-width: 120px; }
-        &.col-materials { flex: 3 1 0; min-width: 180px; }
-        &.col-points { flex: 1 1 0; min-width: 120px; }
-        &.col-cost, &.col-sell, &.col-actual, &.col-blueprint { flex: 1 1 0; min-width: 100px; }
+        &.col-name { flex: 2 1 0; min-width: 140px; }
+        &.col-materials { flex: 3 1 0; min-width: 200px; }
+        &.col-points { flex: 0 0 90px; min-width: 90px; justify-content: flex-start; }
+        &.col-cost { flex: 0 0 140px; min-width: 140px; }
+        &.col-sell, &.col-actual, &.col-blueprint { flex: 1 1 0; min-width: 120px; }
     }
 }
 // 表格品质色

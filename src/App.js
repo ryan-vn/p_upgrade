@@ -1339,7 +1339,7 @@ const App = () => {
           </div>
 
           {
-            state.pathData && false ? <>
+            state.pathData  ? <>
               <div className="path-wrap normal">
                 <div className='wrap-title flex items-center'>
                   <div className='fs-16'>升级路线</div>

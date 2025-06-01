@@ -1,5 +1,3 @@
-
-
 .comp-message {
     position: fixed;
     display: flex;
@@ -8,31 +6,31 @@
     left: 50%;
     top: 50px;
     min-width: 280px;
-    background-color: #fff;
-    border-radius: 4px;
+    background-color: #232323;
+    border-radius: 8px;
     z-index: 199;
-    color: #333;
+    color: #FFF;
     transform: translateX(-50%);
-
     letter-spacing: 1px;
-
-    // border: 1px solid transparent;
-
+    border: 1.5px solid #FFC800;
+    box-shadow: 0 4px 16px 0 rgba(0,0,0,0.18);
+    font-size: 1.1rem;
+    font-weight: 600;
     cursor: default;
 
     &.info {
-        background-color: #0c8cfa;
-
-        color: #fff;
+        background-color: #0070DD;
+        color: #FFF;
+        border-color: #0070DD;
     }
-
     &.success {
-        background-color: #1dc36f;
-        color: #fff;
+        background-color: #1EFF00;
+        color: #181A20;
+        border-color: #1EFF00;
     }
-
     &.error {
-        color: #fff;
-        background-color: #ff3333;
+        background-color: #FF3333;
+        color: #FFF;
+        border-color: #FF3333;
     }
 }

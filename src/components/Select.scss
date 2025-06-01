@@ -1,100 +1,81 @@
-
 .comp-select {
     position: relative;
-    height: 30px;
-  
-    font-size: 14px;
-  
-    // &:hover {
-    //   .select-list {
-    //     display: block;
-    //   }
-    // }
-  
+    height: 36px;
+    font-size: 15px;
     .select-title {
       display: flex;
       padding: 0 15px;
-      line-height: 32px;
-      height: 32px;
-  
-      color: #333;
-  
-      border-radius: 4px;
-      background-color: #fff;
-  
-      border: none;
-  
+      line-height: 36px;
+      height: 36px;
+      color: #FFF;
+      border-radius: 6px;
+      background-color: #232323;
+      border: 1.5px solid #333;
+      transition: border 0.2s, box-shadow 0.2s;
+      &:focus-within {
+        border: 1.5px solid #FFC800;
+        box-shadow: 0 0 0 2px #FFC80044;
+      }
       .prefix {
         padding-right: 10px;
-        border-right: 1px solid #eee;
-  
-        &+p {
-          padding-left: 10px;
-        }
+        border-right: 1px solid #333;
+        &+p { padding-left: 10px; }
       }
-  
     }
-
     .select-input {
-      line-height: 28px;
-      height: 28px;
+      line-height: 32px;
+      height: 32px;
       width: 100%;
       border: none;
       background-color: transparent;
+      color: #FFF;
     }
-  
     .select-arrow-down {
       position: absolute;
       right: 5px;
-      top: 5px;
-      // background-image: url(../asserts/img/arrow-down.svg);
+      top: 8px;
       width: 20px;
       height: 20px;
       background-size: 100%;
+      filter: brightness(1.5);
     }
-  
     .select-gap {
       position: absolute;
       left: 0;
-      top: 30px;
-  
+      top: 36px;
       right: 0;
       height: 6px;
-  
     }
-  
     .select-list {
       display: block;
       min-width: 100%;
       position: absolute;
       left: 0;
-      top: 36px;
-      background-color: #fff;
+      top: 40px;
+      background-color: #232323;
       z-index: 999;
-      border-radius: 4px;
-      color: #333;
-      line-height: 30px;
+      border-radius: 6px;
+      color: #FFF;
+      line-height: 36px;
       overflow: hidden;
-  
       max-height: 420px;
       overflow-y: auto;
-  
+      border: 1.5px solid #FFC800;
+      box-shadow: 0 4px 16px 0 rgba(0,0,0,0.18);
       text-align: left;
     }
-  
     .select-list-item {
       padding: 0 15px;
       word-break: keep-all;
       cursor: pointer;
-  
-      &:hover {
-        background-color: #f1f1f1;
+      &:hover, &.active {
+        background-color: #0070DD;
+        color: #FFF;
       }
     }
-
     &.select-primary {
         .select-title,.select-list {
-            border: 1px solid #ccc;
+            border: 1.5px solid #FFC800;
         }
     }
   }

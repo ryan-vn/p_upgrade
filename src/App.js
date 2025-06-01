@@ -1266,139 +1266,80 @@ const App = () => {
           <div className="price-table-wrap h-100 overflow-auto">
             <div className="price-table">
               <div className="table-header">
-                <div className="table-col">名称</div>
-                <div className="table-col">制造材料/单价</div>
-                <div className="table-col">点数</div>
-                <div className="table-col">生产成本/单次</div>
-                <div className="table-col">售价/单价 <span className="text-success">选择出售方式</span></div>
-                {/* <div className="table-col">售价/单价</div> */}
-                <div className="table-col">实际成本/单次</div>
-                <div className="table-col">图纸 <span className="text-success">选择获取方式</span></div>
-                {/* <div className="table-col">启用</div> */}
+                <div className="table-col col-name">名称</div>
+                <div className="table-col col-materials">制造材料/单价</div>
+                <div className="table-col col-points">点数</div>
+                <div className="table-col col-cost">生产成本/单次</div>
+                <div className="table-col col-sell">售价/单价 <span className="text-success">选择出售方式</span></div>
+                <div className="table-col col-actual">实际成本/单次</div>
+                <div className="table-col col-blueprint">图纸 <span className="text-success">选择获取方式</span></div>
               </div>
 
-              {
-                professionsDataArr[state.userConfig.professionType].map((item, index) => <div key={item.id} className={`table-row row-${index} ${state.pathData?.data?.find(_it => _it.id === item.id) ? ' active' : ''} ${state.highLightItem === item.id ? ' high-light' : ''}`}>
-
-                  <div className="table-col flex items-center">
+              {professionsDataArr[state.userConfig.professionType].map((item, index) => (
+                <div key={item.id} className={`table-row row-${index} ${state.pathData?.data?.find(_it => _it.id === item.id) ? ' active' : ''} ${state.highLightItem === item.id ? ' high-light' : ''}`}>
+                  <div className="table-col col-name flex items-center">
                     <div className="icon-wrap lg">
                       <img className="icon" src={`./resources/wlk/icons/medium/${item.icon}.jpg`} />
-                      {
-                        item.creates && item.creates.count > 1 ? <div className="tag-count">{item.creates.count}</div> : ''
-                      }
+                      {item.creates && item.creates.count > 1 ? <div className="tag-count">{item.creates.count}</div> : ''}
                     </div>
                     <p className="item-name" style={{ whiteSpace: 'initial', color: ['#fff', '#fff', '#1eff00', '#0070dd', '#a335ee', '#ff8000'][item.creates?.quality || 0] }}>{item.name}</p>
                   </div>
-                  <div className="table-col flex flex-column justify-center">
-                    {
-                      item.reagents.map(reagent => <div key={reagent.id} className="item-reagent flex">
-
-                        <ItemWithTip tip={reagent.name} color={['#fff', '#fff', '#1eff00', '#0070dd', '#a335ee', '#ff8000'][reagent.quality || 0]}>
+                  <div className="table-col col-materials">
+                    <div className="material-list">
+                      {item.reagents.map(reagent => (
+                        <div className="material-card" key={reagent.id} title={reagent.name}>
                           <div className="icon-wrap" style={{ marginRight: 5 }}>
                             <img className="icon" src={`./resources/wlk/icons/medium/${reagent.icon}.jpg`} />
-
-                            {
-                              reagent.sources && reagent.sources === 'merchant' ? <span className="sell-tag"></span> : ''
-                            }
-
-                            {
-                              reagent.count > 1 ? <div className="tag-count">{reagent.count}</div> : ''
-                            }
-
                           </div>
-                        </ItemWithTip>
-
-                        {
-                          state.priceData ? getReagentPrice(reagent) : null
-                        }
-
-                      </div>)
-                    }
-                  </div>
-                  <div className="table-col col-points">
-                    <span className="point">{item.color_level_1 || ''}</span>
-                    <span className="point">{item.color_level_2}</span>
-                    <span className="point">{item.color_level_3}</span>
-                    <span className="point">{item.color_level_4}</span>
-                  </div>
-                  <div className="table-col flex items-center">
-                    {/* {
-                      priceData ? <div>{item.reagents ? getNeed(item) || '' : ''}</div> : ''
-                    } */}
-
-                    {
-                      state.userConfig?.itemsStatus && state.userConfig?.itemsStatus[item.name]?.pdCost && !state.userConfig.itemsStatus[item.name].pdCost.isMiss ? <>{getPrice(state.userConfig.itemsStatus[item.name].pdCost.total)}</> : null
-                    }
-                  </div>
-                  <div className="table-col flex flex-column justify-center">
-                    {/* 拍卖售价 */}
-                    {
-                      state.priceData && item.creates && state.priceData[item.name.indexOf('附魔') === 0 ? `卷轴：${item.name}` : item.creates.name] ? <div className={`item-price-content${state.userConfig?.itemsStatus[item.name].sellType === 'auction' ? ' active' : ''}`} onClick={handleSelectSellPrice(item.name, 'auction')} >
-                        <p className="price-tag">拍卖</p>
-                        {getPrice(state.priceData[item.name.indexOf('附魔') === 0 ? `卷轴：${item.name}` : item.creates.name])}
-                      </div> : ''
-                    }
-
-                    {
-                      item.creates?.sell_price ? <div className={`item-price-content${state.userConfig?.itemsStatus[item.name].sellType === 'merchant' ? ' active' : ''}`} onClick={handleSelectSellPrice(item.name, 'merchant')} >
-                        <p className="price-tag spec">卖店</p>
-                        {getPrice(item.creates.sell_price)}
-                      </div> : ''
-                    }
-                  </div>
-    
-                  <div className="table-col flex items-center">
-                    {/* 实际成本 */}
-                    {/* {getActualCost(item)} */}
-
-                    {
-                      state.userConfig?.itemsStatus[item.name]?.sellType === 'auction' && state.userConfig.itemsStatus[item.name].acCostAuc && !state.userConfig.itemsStatus[item.name].acCostAuc.isMiss ? getPrice(state.userConfig.itemsStatus[item.name].acCostAuc.total) : null
-                    }
-
-                    {
-                      state.userConfig?.itemsStatus[item.name].sellType === 'merchant' && state.userConfig.itemsStatus[item.name].acCostMer && !state.userConfig.itemsStatus[item.name].acCostMer.isMiss ? getPrice(state.userConfig.itemsStatus[item.name].acCostMer.total) : null
-                    }
-
-                  </div>
-
-                  <div className="table-col flex flex-column justify-center">
-                    {/* 图纸来源 */}
-
-                    {
-                      !item.isDisabled && !item.bluePrint ? <div className="sources-wrap" >
-                        <p className={`sources-title type-1 ${state.userConfig?.itemsStatus[item.name].access == 1 ? 'active' : ''}`} onClick={() => {
-                          handleAccessChange(item.name, 1, item.isDisabled)
-                        }} >训练师</p>
-                      </div> : null
-                    }
-
-
-                    {
-                      item.bluePrint?.sources ? genSources(item.bluePrint.sources, item) : null
-                    }
-
-                    {
-                      item.bluePrint?.name ? <div className="sources-wrap">
-                        <p className={`sources-title type-4 ${state.userConfig?.itemsStatus[item.name].access == 4 ? 'active' : ''}`} onClick={() => {
-                          handleAccessChange(item.name, 4, item.isDisabled)
-                        }}>拍卖&nbsp;&nbsp;{state.priceData[item.bluePrint.name] ? getPrice(state.priceData[item.bluePrint.name]) : <span className="text-error">缺失</span>}</p>
-                      </div> : null
-                    }
-
-                    <div className="sources-wrap" >
-                      <p className={`sources-title type-2 ${state.userConfig?.itemsStatus[item.name].access == 2 ? 'active' : ''}`} onClick={() => {
-                        handleAccessChange(item.name, 2, item.isDisabled)
-                      }}>禁用</p>
+                          <span className="material-name">{reagent.name}</span>
+                          {reagent.count > 1 && <span className="material-count">x{reagent.count}</span>}
+                          {state.priceData ? <span className="material-price">{getReagentPrice(reagent)}</span> : null}
+                        </div>
+                      ))}
                     </div>
                   </div>
-
-                </div>)
-              }
+                  <div className="table-col col-points">
+                    <span className="point point-orange">{item.color_level_1 || ''}</span>
+                    <span className="point point-yellow">{item.color_level_2}</span>
+                    <span className="point point-green">{item.color_level_3}</span>
+                    <span className="point point-gray">{item.color_level_4}</span>
+                  </div>
+                  <div className="table-col col-cost flex items-center">
+                    {state.userConfig?.itemsStatus && state.userConfig?.itemsStatus[item.name]?.pdCost && !state.userConfig.itemsStatus[item.name].pdCost.isMiss ? <>{getPrice(state.userConfig.itemsStatus[item.name].pdCost.total)}</> : null}
+                  </div>
+                  <div className="table-col col-sell flex flex-column justify-center">
+                    {state.priceData && item.creates && state.priceData[item.name.indexOf('附魔') === 0 ? `卷轴：${item.name}` : item.creates.name] ? <div className={`item-price-content${state.userConfig?.itemsStatus[item.name].sellType === 'auction' ? ' active' : ''}`} onClick={handleSelectSellPrice(item.name, 'auction')} >
+                      <p className="price-tag">拍卖</p>
+                      {getPrice(state.priceData[item.name.indexOf('附魔') === 0 ? `卷轴：${item.name}` : item.creates.name])}
+                    </div> : ''}
+                    {item.creates?.sell_price ? <div className={`item-price-content${state.userConfig?.itemsStatus[item.name].sellType === 'merchant' ? ' active' : ''}`} onClick={handleSelectSellPrice(item.name, 'merchant')} >
+                      <p className="price-tag spec">卖店</p>
+                      {getPrice(item.creates.sell_price)}
+                    </div> : ''}
+                  </div>
+                  <div className="table-col col-actual flex items-center">
+                    {state.userConfig?.itemsStatus[item.name]?.sellType === 'auction' && state.userConfig.itemsStatus[item.name].acCostAuc && !state.userConfig.itemsStatus[item.name].acCostAuc.isMiss ? getPrice(state.userConfig.itemsStatus[item.name].acCostAuc.total) : null}
+                    {state.userConfig?.itemsStatus[item.name].sellType === 'merchant' && state.userConfig.itemsStatus[item.name].acCostMer && !state.userConfig.itemsStatus[item.name].acCostMer.isMiss ? getPrice(state.userConfig.itemsStatus[item.name].acCostMer.total) : null}
+                  </div>
+                  <div className="table-col col-blueprint flex flex-column justify-center">
+                    {!item.isDisabled && !item.bluePrint ? <div className="sources-wrap" >
+                      <p className={`sources-title type-1 ${state.userConfig?.itemsStatus[item.name].access == 1 ? 'active' : ''}`} onClick={() => { handleAccessChange(item.name, 1, item.isDisabled) }} >训练师</p>
+                    </div> : null}
+                    {item.bluePrint?.sources ? genSources(item.bluePrint.sources, item) : null}
+                    {item.bluePrint?.name ? <div className="sources-wrap">
+                      <p className={`sources-title type-4 ${state.userConfig?.itemsStatus[item.name].access == 4 ? 'active' : ''}`} onClick={() => { handleAccessChange(item.name, 4, item.isDisabled) }}>拍卖&nbsp;&nbsp;{state.priceData[item.bluePrint.name] ? getPrice(state.priceData[item.bluePrint.name]) : <span className="text-error">缺失</span>}</p>
+                    </div> : null}
+                    <div className="sources-wrap" >
+                      <p className={`sources-title type-2 ${state.userConfig?.itemsStatus[item.name].access == 2 ? 'active' : ''}`} onClick={() => { handleAccessChange(item.name, 2, item.isDisabled) }}>禁用</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
 
           {
-            state.pathData ? <>
+            state.pathData && false ? <>
               <div className="path-wrap normal">
                 <div className='wrap-title flex items-center'>
                   <div className='fs-16'>升级路线</div>
